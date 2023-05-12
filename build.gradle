@@ -1,0 +1,16 @@
+
+wrapper {
+    gradleVersion = "7.6"
+}
+
+ext {
+    versions = [
+            springBoot: "2.7.11",
+            gradleDocker: "6.6.1",
+            gradleLombok: "5.0.0",
+            mockito: "5.3.1",
+            junit     : [
+                    jupiter: "5.5.2"
+            ]
+    ]
+}
