@@ -1,9 +1,6 @@
 package org.stelios.courses.usecases.model.events;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,6 +8,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class ConcertEventRequestModel {
 
     private String id;

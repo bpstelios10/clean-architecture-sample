@@ -1,9 +1,11 @@
 package org.stelios.courses.domain.events.factories;
 
+import org.springframework.stereotype.Component;
 import org.stelios.courses.domain.events.ConcertEvent;
 
 import java.util.Date;
 
+@Component
 public class ConcertEventFactory implements IConcertEventFactory {
 
     @Override
