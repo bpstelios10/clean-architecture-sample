@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="default">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <fieldNames>
+                    <level>log.level</level>
+                </fieldNames>
+                <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                    <shortenedClassNameLength>20</shortenedClassNameLength>
+                    <maxLength>12000</maxLength>
+                </throwableConverter>
+            </encoder>
+        </appender>
+
+        <logger name="org.stelios.courses" additivity="false" level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="org.apache" additivity="false" level="ERROR">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
+    </springProfile>
+
+    <springProfile name="local | meo-docker-compose">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.stelios.courses" additivity="false" level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <turboFilter class="ch.qos.logback.classic.turbo.DynamicThresholdFilter">
+        <Key>dynamicThreshold</Key>
+        <DefaultThreshold>OFF</DefaultThreshold>
+        <onHigherOrEqual>ACCEPT</onHigherOrEqual>
+        <onLower>NEUTRAL</onLower>
+        <MDCValueLevelPair>
+            <value>info</value>
+            <level>INFO</level>
+        </MDCValueLevelPair>
+        <MDCValueLevelPair>
+            <value>debug</value>
+            <level>DEBUG</level>
+        </MDCValueLevelPair>
+        <MDCValueLevelPair>
+            <value>trace</value>
+            <level>TRACE</level>
+        </MDCValueLevelPair>
+    </turboFilter>
+</configuration>

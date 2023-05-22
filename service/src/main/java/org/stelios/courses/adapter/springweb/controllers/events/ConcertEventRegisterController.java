@@ -1,5 +1,6 @@
-package org.stelios.courses.adapter.controllers.events;
+package org.stelios.courses.adapter.springweb.controllers.events;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterBound
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;
 
+@Slf4j
 @RestController
 @RequestMapping("/events")
 public class ConcertEventRegisterController {
@@ -22,6 +24,8 @@ public class ConcertEventRegisterController {
 
     @PostMapping("/create")
     public ConcertEventResponseModel create(@RequestBody ConcertEventRequestModel requestModel) {
+        log.info("request:" + requestModel);
+
         return registerBoundary.save(requestModel);
     }
 }

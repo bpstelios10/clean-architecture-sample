@@ -1,5 +1,6 @@
 package org.stelios.courses.usecases.interactors.events;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.stelios.courses.domain.events.IEvent;
@@ -9,6 +10,7 @@ import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterGatew
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;
 
+@Slf4j
 @Component
 public class ConcertEventInteractor implements IConcertEventRegisterBoundary {
 
@@ -23,7 +25,8 @@ public class ConcertEventInteractor implements IConcertEventRegisterBoundary {
 
     @Override
     public ConcertEventResponseModel save(ConcertEventRequestModel requestModel) {
-        //do checks
+        log.debug("received object: " + requestModel);
+        //TODO do checks
 
         IEvent event = factory.create(
                 requestModel.getId(),

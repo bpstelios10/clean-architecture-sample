@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.stelios.courses.adapter.springweb.controllers.events.ConcertEventRegisterController;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterBoundary;
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;

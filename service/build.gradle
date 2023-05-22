@@ -29,6 +29,8 @@ repositories {
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${versions.springBoot}"
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.3'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     runtimeOnly 'com.h2database:h2:2.1.214'
 
