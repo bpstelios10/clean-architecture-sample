@@ -9,8 +9,10 @@ spring:
       ddl-auto: 'create'
   h2:
     console:
-      enabled: 'true'
+      enabled: true
       path: '/h2-console'
+      settings:
+        web-allow-others: true
 
 server:
   servlet:
