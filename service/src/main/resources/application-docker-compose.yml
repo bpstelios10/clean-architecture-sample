@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://postgres:5432/events'
+    username: 'dbuser'
+    password: 'dbpass'
+    driver-class-name: 'org.postgresql.Driver'
+  jpa:
+    database-platform: 'org.hibernate.dialect.PostgreSQLDialect'
+    properties:
+      hibernate:
+        default_schema: 'events_test'
+    show-sql: true
