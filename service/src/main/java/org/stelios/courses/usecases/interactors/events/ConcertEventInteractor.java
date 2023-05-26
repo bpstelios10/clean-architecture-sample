@@ -3,6 +3,7 @@ package org.stelios.courses.usecases.interactors.events;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.stelios.courses.adapter.repositories.events.EventAlreadyExistsException;
 import org.stelios.courses.domain.events.IEvent;
 import org.stelios.courses.domain.events.factories.ConcertEventFactory;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterBoundary;
@@ -24,9 +25,12 @@ public class ConcertEventInteractor implements IConcertEventRegisterBoundary {
     }
 
     @Override
-    public ConcertEventResponseModel save(ConcertEventRequestModel requestModel) {
+    public ConcertEventResponseModel save(ConcertEventRequestModel requestModel) throws EventAlreadyExistsException {
         log.debug("received object: " + requestModel);
-        //TODO do checks
+
+        if (registerGateway.eventAlreadyExists(requestModel.getId())) {
+            throw new EventAlreadyExistsException();
+        }
 
         IEvent event = factory.create(
                 requestModel.getId(),

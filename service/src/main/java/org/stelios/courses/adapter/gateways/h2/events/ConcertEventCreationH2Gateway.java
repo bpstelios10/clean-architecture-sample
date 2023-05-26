@@ -18,6 +18,11 @@ public class ConcertEventCreationH2Gateway implements IConcertEventRegisterGatew
     }
 
     @Override
+    public boolean eventAlreadyExists(String id) {
+        return repository.findById(id).isPresent();
+    }
+
+    @Override
     public void save(IEvent event) {
         ConcertEventJpaMapper mapper =
                 new ConcertEventJpaMapper(event.getId(), event.getLocation(), event.getDate(), event.getTicketPrice(), event.getCapacity(), event.getSpotsLeft());

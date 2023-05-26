@@ -4,5 +4,7 @@ import org.stelios.courses.domain.events.IEvent;
 
 public interface IConcertEventRegisterGateway {
 
+    boolean eventAlreadyExists(String id);
+
     void save(IEvent event);
 }
