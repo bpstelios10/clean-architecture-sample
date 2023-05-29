@@ -6,29 +6,41 @@ import org.springframework.stereotype.Component;
 import org.stelios.courses.adapter.repositories.events.EventAlreadyExistsException;
 import org.stelios.courses.domain.events.IEvent;
 import org.stelios.courses.domain.events.factories.ConcertEventFactory;
-import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterBoundary;
-import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterGateway;
+import org.stelios.courses.usecases.boundaries.events.IConcertEventBoundary;
+import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
-public class ConcertEventInteractor implements IConcertEventRegisterBoundary {
+public class ConcertEventInteractor implements IConcertEventBoundary {
 
     private final ConcertEventFactory factory;
-    private final IConcertEventRegisterGateway registerGateway;
+    private final IConcertEventGateway eventGateway;
 
     @Autowired
-    public ConcertEventInteractor(ConcertEventFactory factory, IConcertEventRegisterGateway registerGateway) {
+    public ConcertEventInteractor(ConcertEventFactory factory, IConcertEventGateway eventGateway) {
         this.factory = factory;
-        this.registerGateway = registerGateway;
+        this.eventGateway = eventGateway;
+    }
+
+    @Override
+    public List<ConcertEventResponseModel> getAll() {
+        List<IEvent> allEvents = eventGateway.getAllEvents();
+
+        return allEvents.stream()
+                .map(e -> new ConcertEventResponseModel(e.getId(), e.getLocation(), e.getDate(), e.getTicketPrice(), e.getCapacity(), e.getSpotsLeft()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public ConcertEventResponseModel save(ConcertEventRequestModel requestModel) throws EventAlreadyExistsException {
         log.debug("received object: " + requestModel);
 
-        if (registerGateway.eventAlreadyExists(requestModel.getId())) {
+        if (eventGateway.eventAlreadyExists(requestModel.getId())) {
             throw new EventAlreadyExistsException();
         }
 
@@ -41,7 +53,7 @@ public class ConcertEventInteractor implements IConcertEventRegisterBoundary {
                 requestModel.getSpotsLeft()
         );
 
-        registerGateway.save(event);
+        eventGateway.save(event);
 
         return new ConcertEventResponseModel(event.getId(), event.getLocation(), event.getDate(), event.getTicketPrice(), event.getCapacity(), event.getSpotsLeft());
     }

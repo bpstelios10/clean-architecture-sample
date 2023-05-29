@@ -4,7 +4,11 @@ import org.stelios.courses.adapter.repositories.events.EventAlreadyExistsExcepti
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;
 
-public interface IConcertEventRegisterBoundary {
+import java.util.List;
+
+public interface IConcertEventBoundary {
+
+    List<ConcertEventResponseModel> getAll();
 
     ConcertEventResponseModel save(ConcertEventRequestModel requestModel) throws EventAlreadyExistsException;
 }

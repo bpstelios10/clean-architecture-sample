@@ -5,16 +5,31 @@ import org.springframework.stereotype.Component;
 import org.stelios.courses.adapter.repositories.events.ConcertEventJpaMapper;
 import org.stelios.courses.adapter.repositories.events.IConcertEventRepository;
 import org.stelios.courses.domain.events.IEvent;
-import org.stelios.courses.usecases.boundaries.events.IConcertEventRegisterGateway;
+import org.stelios.courses.domain.events.factories.ConcertEventFactory;
+import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-public class ConcertEventCreationH2Gateway implements IConcertEventRegisterGateway {
+public class ConcertEventH2Gateway implements IConcertEventGateway {
 
     private final IConcertEventRepository repository;
+    private final ConcertEventFactory factory;
 
     @Autowired
-    public ConcertEventCreationH2Gateway(IConcertEventRepository repository) {
+    public ConcertEventH2Gateway(IConcertEventRepository repository, ConcertEventFactory factory) {
         this.repository = repository;
+        this.factory = factory;
+    }
+
+    @Override
+    public List<IEvent> getAllEvents() {
+        List<ConcertEventJpaMapper> repositoryEvents = repository.findAll();
+
+        return repositoryEvents.stream()
+                .map(e -> factory.create(e.getId(), e.getLocation(), e.getDate(), e.getTicketPrice(), e.getCapacity(), e.getSpotsLeft()))
+                .collect(Collectors.toList());
     }
 
     @Override

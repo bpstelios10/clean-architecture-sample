@@ -1,7 +1,10 @@
 package org.stelios.courses.domain.events;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Date;
 
+@EqualsAndHashCode
 public class ConcertEvent implements IEvent {
 
     private final String id;

@@ -2,7 +2,10 @@ package org.stelios.courses.usecases.boundaries.events;
 
 import org.stelios.courses.domain.events.IEvent;
 
-public interface IConcertEventRegisterGateway {
+import java.util.List;
+
+public interface IConcertEventGateway {
+    List<IEvent> getAllEvents();
 
     boolean eventAlreadyExists(String id);
 
