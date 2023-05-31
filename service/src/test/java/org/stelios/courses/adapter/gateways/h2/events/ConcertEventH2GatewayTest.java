@@ -11,7 +11,7 @@ import org.stelios.courses.adapter.repositories.events.ConcertEventJpaMapper;
 import org.stelios.courses.adapter.repositories.events.IConcertEventRepository;
 import org.stelios.courses.domain.events.ConcertEvent;
 import org.stelios.courses.domain.events.IEvent;
-import org.stelios.courses.domain.events.factories.ConcertEventFactory;
+import org.stelios.courses.domain.events.factories.IConcertEventFactory;
 
 import java.time.Instant;
 import java.util.Date;
@@ -34,7 +34,7 @@ class ConcertEventH2GatewayTest {
     @Mock
     private IConcertEventRepository repository;
     @Mock
-    private ConcertEventFactory factory;
+    private IConcertEventFactory factory;
     @InjectMocks
     private ConcertEventH2Gateway gateway;
 

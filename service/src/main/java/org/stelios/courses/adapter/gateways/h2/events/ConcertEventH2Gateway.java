@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.stelios.courses.adapter.repositories.events.ConcertEventJpaMapper;
 import org.stelios.courses.adapter.repositories.events.IConcertEventRepository;
 import org.stelios.courses.domain.events.IEvent;
-import org.stelios.courses.domain.events.factories.ConcertEventFactory;
+import org.stelios.courses.domain.events.factories.IConcertEventFactory;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public class ConcertEventH2Gateway implements IConcertEventGateway {
 
     private final IConcertEventRepository repository;
-    private final ConcertEventFactory factory;
+    private final IConcertEventFactory factory;
 
     @Autowired
-    public ConcertEventH2Gateway(IConcertEventRepository repository, ConcertEventFactory factory) {
+    public ConcertEventH2Gateway(IConcertEventRepository repository, IConcertEventFactory factory) {
         this.repository = repository;
         this.factory = factory;
     }

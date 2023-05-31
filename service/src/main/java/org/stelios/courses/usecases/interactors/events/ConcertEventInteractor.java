@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.stelios.courses.adapter.repositories.events.EventAlreadyExistsException;
 import org.stelios.courses.domain.events.IEvent;
-import org.stelios.courses.domain.events.factories.ConcertEventFactory;
+import org.stelios.courses.domain.events.factories.IConcertEventFactory;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventBoundary;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 @Component
 public class ConcertEventInteractor implements IConcertEventBoundary {
 
-    private final ConcertEventFactory factory;
+    private final IConcertEventFactory factory;
     private final IConcertEventGateway eventGateway;
 
     @Autowired
-    public ConcertEventInteractor(ConcertEventFactory factory, IConcertEventGateway eventGateway) {
+    public ConcertEventInteractor(IConcertEventFactory factory, IConcertEventGateway eventGateway) {
         this.factory = factory;
         this.eventGateway = eventGateway;
     }

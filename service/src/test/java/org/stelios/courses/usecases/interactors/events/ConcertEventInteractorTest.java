@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.stelios.courses.adapter.repositories.events.EventAlreadyExistsException;
 import org.stelios.courses.domain.events.ConcertEvent;
 import org.stelios.courses.domain.events.IEvent;
-import org.stelios.courses.domain.events.factories.ConcertEventFactory;
+import org.stelios.courses.domain.events.factories.IConcertEventFactory;
 import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
 import org.stelios.courses.usecases.model.events.ConcertEventRequestModel;
 import org.stelios.courses.usecases.model.events.ConcertEventResponseModel;
@@ -27,7 +27,7 @@ class ConcertEventInteractorTest {
 
     private static final Date TEST_DATE = Date.from(Instant.now());
     @Mock
-    private ConcertEventFactory factory;
+    private IConcertEventFactory factory;
     @Mock
     private IConcertEventGateway eventGateway;
 
