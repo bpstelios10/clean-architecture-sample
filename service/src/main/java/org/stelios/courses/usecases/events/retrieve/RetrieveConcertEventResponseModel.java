@@ -1,15 +1,17 @@
-package org.stelios.courses.usecases.model.events;
+package org.stelios.courses.usecases.events.retrieve;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString
-public class ConcertEventRequestModel {
+public class RetrieveConcertEventResponseModel {
 
     private String id;
     private String location;

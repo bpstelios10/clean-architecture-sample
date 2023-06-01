@@ -1,4 +1,4 @@
-package org.stelios.courses.usecases.model.events;
+package org.stelios.courses.usecases.events.register;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ConcertEventResponseModel {
+public class RegisterConcertEventResponseModel {
 
     private String id;
     private String location;

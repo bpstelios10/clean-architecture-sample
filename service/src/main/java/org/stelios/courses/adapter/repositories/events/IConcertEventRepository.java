@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface IConcertEventRepository extends JpaRepository<ConcertEventJpaMapper, String> {
+
     List<ConcertEventJpaMapper> findAll();
 
     Optional<ConcertEventJpaMapper> findById(String id);

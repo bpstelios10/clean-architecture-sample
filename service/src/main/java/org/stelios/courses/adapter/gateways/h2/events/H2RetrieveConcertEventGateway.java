@@ -6,19 +6,19 @@ import org.stelios.courses.adapter.repositories.events.ConcertEventJpaMapper;
 import org.stelios.courses.adapter.repositories.events.IConcertEventRepository;
 import org.stelios.courses.domain.events.IEvent;
 import org.stelios.courses.domain.events.factories.IConcertEventFactory;
-import org.stelios.courses.usecases.boundaries.events.IConcertEventGateway;
+import org.stelios.courses.usecases.events.retrieve.IRetrieveConcertEventGateway;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ConcertEventH2Gateway implements IConcertEventGateway {
+public class H2RetrieveConcertEventGateway implements IRetrieveConcertEventGateway {
 
     private final IConcertEventRepository repository;
     private final IConcertEventFactory factory;
 
     @Autowired
-    public ConcertEventH2Gateway(IConcertEventRepository repository, IConcertEventFactory factory) {
+    public H2RetrieveConcertEventGateway(IConcertEventRepository repository, IConcertEventFactory factory) {
         this.repository = repository;
         this.factory = factory;
     }
@@ -30,18 +30,5 @@ public class ConcertEventH2Gateway implements IConcertEventGateway {
         return repositoryEvents.stream()
                 .map(e -> factory.create(e.getId(), e.getLocation(), e.getDate(), e.getTicketPrice(), e.getCapacity(), e.getSpotsLeft()))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public boolean eventAlreadyExists(String id) {
-        return repository.findById(id).isPresent();
-    }
-
-    @Override
-    public void save(IEvent event) {
-        ConcertEventJpaMapper mapper =
-                new ConcertEventJpaMapper(event.getId(), event.getLocation(), event.getDate(), event.getTicketPrice(), event.getCapacity(), event.getSpotsLeft());
-
-        repository.save(mapper);
     }
 }
